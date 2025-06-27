@@ -27,4 +27,7 @@ add_executable(Logging main.cpp
     logging/logger/logger.hpp
     logging/logger/simple_logger.cpp
     logging/logger/simple_logger.hpp
+    logging/handling/file_handler.cpp
+    logging/handling/file_handler.hpp
+    logging/logging.hpp
 )

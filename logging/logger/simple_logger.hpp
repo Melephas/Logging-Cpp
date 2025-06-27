@@ -7,11 +7,11 @@
 namespace logging::logger {
     class simple_logger final : virtual public logger {
         level level;
-        std::vector<std::unique_ptr<filter::filter>> filters;
-        std::vector<std::unique_ptr<handling::handler>> handlers;
+        std::vector<filter::filter> filters;
+        std::unique_ptr<handling::handler> handler;
     public:
-        simple_logger();
-        simple_logger(logging::level level, std::vector<std::unique_ptr<filter::filter>> filters, std::vector<std::unique_ptr<handling::handler>> handlers);
+        //simple_logger();
+        simple_logger(logging::level level, std::vector<filter::filter> filters, std::unique_ptr<handling::handler> handler);
         ~simple_logger() override = default;
 
         void handle_record(const record &record) const override;

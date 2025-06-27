@@ -13,7 +13,7 @@ logging::handling::stdout_handler::stdout_handler()
 
 logging::handling::stdout_handler::stdout_handler(
     const logging::level level,
-    std::vector<std::unique_ptr<filter::filter>> filters,
+    std::vector<filter::filter> filters,
     std::unique_ptr<format::formatter> formatter
 ) :
     level(level),
@@ -21,11 +21,11 @@ logging::handling::stdout_handler::stdout_handler(
     formatter(std::move(formatter))
 {}
 
-void logging::handling::stdout_handler::dispatch_record(record record) const noexcept {
+void logging::handling::stdout_handler::dispatch_record(const record &record) const noexcept {
     if (!level_allows_level(this->level, record.level)) return;
 
     for (const auto& filter : this->filters) {
-        if (filter->should_drop(record)) return;
+        if (filter(record)) return;
     }
 
     const std::string formatted_record = this->formatter->format_record(record);
