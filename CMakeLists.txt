@@ -30,4 +30,8 @@ add_executable(Logging main.cpp
     logging/handling/file_handler.cpp
     logging/handling/file_handler.hpp
     logging/logging.hpp
+        logging/factory.cpp
+        logging/factory.hpp
+        logging/error/factory_error.cpp
+        logging/error/factory_error.hpp
 )

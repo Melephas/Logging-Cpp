@@ -3,9 +3,9 @@
 #include "simple_logger.hpp"
 
 
-std::unique_ptr<logging::logger::logger> logging::logger::get_logger() {
+std::unique_ptr<logging::logger::logger> logging::logger::get_logger(level lvl = level::debug) {
     return std::make_unique<simple_logger>(
-        level::debug,
+        lvl,
         std::vector<filter::filter>(),
         handling::get_handler("stdout")
     );

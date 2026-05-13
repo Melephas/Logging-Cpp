@@ -1,11 +1,10 @@
 #include "logging/logging.hpp"
 
 
-
 int main() {
-    const auto log = logging::logger::get_logger();
+    const auto log = logging::factory::get_logger("trace stdout");
 
-    log->trace("Created default logger");
+    log->trace("Created logger from factory");
 
     log->debug("This is a debug logger");
 

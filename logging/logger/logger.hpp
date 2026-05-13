@@ -27,6 +27,6 @@ namespace logging::logger {
         virtual void error(std::string_view message) const = 0;
     };
 
-    [[nodiscard]] std::unique_ptr<logger> get_logger();
+    [[nodiscard]] std::unique_ptr<logger> get_logger(level lvl);
     [[nodiscard]] std::unique_ptr<logger> get_logger(std::string_view target);
 }

@@ -2,6 +2,7 @@
 
 #include "record.hpp"
 #include "level.hpp"
+#include "factory.hpp"
 
 #include "error/conversion_error.hpp"
 
