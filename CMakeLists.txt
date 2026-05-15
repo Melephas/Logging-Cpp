@@ -3,7 +3,8 @@ project(logging)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(Logging main.cpp
+add_library(Logging 
+#    main.cpp
     logging/level.hpp
     logging/level.cpp
     logging/record.hpp
@@ -35,3 +36,5 @@ add_executable(Logging main.cpp
         logging/error/factory_error.cpp
         logging/error/factory_error.hpp
 )
+
+target_include_directories(Logging PUBLIC logging)
