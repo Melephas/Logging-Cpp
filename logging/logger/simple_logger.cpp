@@ -2,23 +2,11 @@
 
 #include <utility>
 
-// logging::logger::simple_logger::simple_logger() :
-//     simple_logger(level::debug, {}, {}) {
-//     this->handlers.push_back(handling::get_default_handler());
-// }
+logging::logger::simple_logger::simple_logger(const level logger_level, std::vector<filter::filter> filters, std::unique_ptr<handling::handler> handler)
+    : logger_level { logger_level }, filters(std::move(filters)), handler(std::move(handler)) {}
 
-logging::logger::simple_logger::simple_logger(
-    const logging::level level,
-    std::vector<filter::filter> filters,
-    std::unique_ptr<handling::handler> handler
-) :
-    level(level),
-    filters(std::move(filters)),
-    handler(std::move(handler)) {
-}
-
-void logging::logger::simple_logger::handle_record(const record &record) const {
-    if (!level_allows_level(this->level, record.level)) return;
+void logging::logger::simple_logger::handle_record(record const& record) const {
+    if (!level_allows_level(this->logger_level, record.record_level)) return;
 
     for (const auto &filter : this->filters) {
         if (filter(record)) return;

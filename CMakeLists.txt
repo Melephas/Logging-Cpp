@@ -3,38 +3,37 @@ project(logging)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_library(Logging 
+add_library(Logging
 #    main.cpp
-    logging/level.hpp
-    logging/level.cpp
-    logging/record.hpp
-    logging/record.cpp
+        logging/level.hpp
+        logging/level.cpp
+        logging/record.hpp
+        logging/record.cpp
 
-    logging/format/formatter.hpp
-    logging/format/formatter.cpp
-    logging/format/simple_formatter.cpp
-    logging/format/simple_formatter.hpp
+        logging/format/formatter.hpp
+        logging/format/simple_formatter.cpp
+        logging/format/simple_formatter.hpp
 
-    logging/error/conversion_error.hpp
-    logging/error/conversion_error.cpp
+        logging/error/conversion_error.hpp
+        logging/error/conversion_error.cpp
 
-    logging/filter/filter.hpp
+        logging/filter/filter.hpp
 
-    logging/handling/handler.cpp
-    logging/handling/handler.hpp
-    logging/handling/stdout_handler.cpp
-    logging/handling/stdout_handler.hpp
-    logging/logger/logger.cpp
-    logging/logger/logger.hpp
-    logging/logger/simple_logger.cpp
-    logging/logger/simple_logger.hpp
-    logging/handling/file_handler.cpp
-    logging/handling/file_handler.hpp
-    logging/logging.hpp
-        logging/factory.cpp
-        logging/factory.hpp
-        logging/error/factory_error.cpp
-        logging/error/factory_error.hpp
+        logging/handling/handler.hpp
+        logging/handling/stdout_handler.cpp
+        logging/handling/stdout_handler.hpp
+        logging/logger/logger.hpp
+        logging/logger/simple_logger.cpp
+        logging/logger/simple_logger.hpp
+        logging/handling/file_handler.cpp
+        logging/handling/file_handler.hpp
+        logging/logging.hpp
+#        logging/factory.cpp
+#        logging/factory.hpp
+#        logging/error/factory_error.cpp
+#        logging/error/factory_error.hpp
+#        logging/logger/multi_logger.cpp
+#        logging/logger/multi_logger.hpp
 )
 
 target_include_directories(Logging PUBLIC logging)

@@ -1,11 +1,11 @@
 #include "level.hpp"
 
-#include <sstream>
+#include <format>
 
 #include "error/conversion_error.hpp"
 
 
-[[nodiscard]] std::string_view logging::level_to_string(const level& level) {
+[[nodiscard]] std::string_view logging::level_to_string(level const& level) {
     switch (level) {
         case level::trace:
             return "trace";
@@ -17,9 +17,8 @@
             return "warning";
         case level::error:
             return "error";
-        default:
-            std::stringstream string_builder;
-            string_builder << "Invalid level value: " << static_cast<std::uint8_t>(level);
-            throw error::conversion_error(string_builder.str());
+    default:
+            const auto str = std::format("Invalid level value: {}", static_cast<std::uint8_t>(level));
+            throw error::conversion_error(str);
     }
 }

@@ -7,22 +7,17 @@
 #include "../level.hpp"
 
 
-logging::handling::stdout_handler::stdout_handler()
-    : stdout_handler(level::debug, {}, format::get_default_formatter())
-{}
+// logging::handling::stdout_handler::stdout_handler()
+//     : stdout_handler(level::debug, {}, format::get_default_formatter()) {}
 
 logging::handling::stdout_handler::stdout_handler(
-    const logging::level level,
+    const level handler_level,
     std::vector<filter::filter> filters,
     std::unique_ptr<format::formatter> formatter
-) :
-    level(level),
-    filters(std::move(filters)),
-    formatter(std::move(formatter))
-{}
+) : handler_level(handler_level), filters(std::move(filters)), formatter(std::move(formatter)) {}
 
-void logging::handling::stdout_handler::dispatch_record(const record &record) const noexcept {
-    if (!level_allows_level(this->level, record.level)) return;
+void logging::handling::stdout_handler::dispatch_record(record const& record) const noexcept {
+    if (!level_allows_level(this->handler_level, record.record_level)) return;
 
     for (const auto& filter : this->filters) {
         if (filter(record)) return;

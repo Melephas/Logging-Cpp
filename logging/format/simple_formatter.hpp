@@ -19,7 +19,7 @@ namespace logging::format {
         std::string time_format_string;
 
         [[nodiscard]] std::string format_level(const level& level) const;
-        [[nodiscard]] std::string format_time(const std::time_t& time) const;
+        [[nodiscard]] std::string format_time(const std::chrono::time_point<std::chrono::system_clock> &time) const;
 
     };
 }

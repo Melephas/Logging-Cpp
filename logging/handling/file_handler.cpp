@@ -4,20 +4,20 @@
 #include <random>
 
 
-logging::handling::file_handler::file_handler(const std::string& file_path) : file_handler(
-        level::debug,
-        {},
-        format::get_default_formatter(),
-        file_path
-    ) {}
+// logging::handling::file_handler::file_handler(const std::string& file_path) : file_handler(
+//         level::debug,
+//         {},
+//         format::get_default_formatter(),
+//         file_path
+//     ) {}
 
 logging::handling::file_handler::file_handler(
-    const logging::level level,
+    const level handler_level,
     std::vector<filter::filter> filters,
     std::unique_ptr<format::formatter> formatter,
     const std::string& file_path
 ) :
-    level(level),
+    handler_level(handler_level),
     filters(std::move(filters)),
     formatter(std::move(formatter))
 {
@@ -29,7 +29,7 @@ logging::handling::file_handler::~file_handler() {
 }
 
 void logging::handling::file_handler::dispatch_record(const record &record) const noexcept {
-    if (!level_allows_level(this->level, record.level)) return;
+    if (!level_allows_level(this->handler_level, record.record_level)) return;
 
     for (const auto& filter : this->filters) {
         if (filter(record)) return;

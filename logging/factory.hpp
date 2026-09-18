@@ -1,5 +1,6 @@
 #pragma once
 
+#include "filter/filter.hpp"
 #include "logger/simple_logger.hpp"
 
 

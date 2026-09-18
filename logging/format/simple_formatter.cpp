@@ -18,7 +18,7 @@ logging::format::simple_formatter::simple_formatter() noexcept {
 }
 
 std::string logging::format::simple_formatter::format_record(const record &record) const noexcept {
-    const auto level_string = this->format_level(record.level);
+    const auto level_string = this->format_level(record.record_level);
     const auto time_string = this->format_time(record.time);
 
     std::stringstream builder;
@@ -38,21 +38,12 @@ std::string logging::format::simple_formatter::format_level(const level &level) 
     return this->level_format_table.at(level);
 }
 
-std::string logging::format::simple_formatter::format_time(const std::time_t &time) const { // NOLINT(*-convert-member-functions-to-static)
-    const std::tm *local_time = std::localtime(&time);
-    char formatted_time[256] = {};
-    const std::size_t bytes_written = std::strftime(
-        reinterpret_cast<char *>(&formatted_time),
-        255,
-        this->time_format_string.c_str(),
-        local_time
-    );
+std::string logging::format::simple_formatter::format_time(const std::chrono::time_point<std::chrono::system_clock> &time) const {
+    auto zt = std::chrono::zoned_time {
+        std::chrono::current_zone(),
+        std::chrono::time_point_cast<std::chrono::seconds>(time)
+    };
 
-    if (bytes_written == 0) {
-        throw error::conversion_error("Failed to format time struct");
-    }
-
-    std::string ret(formatted_time, bytes_written);
-    return ret;
+    return std::format("{:%FT%T%z}", zt);
 }
 

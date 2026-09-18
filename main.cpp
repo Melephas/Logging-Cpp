@@ -2,9 +2,18 @@
 
 
 int main() {
-    const auto log = logging::factory::get_logger("trace stdout");
+    std::vector<logging::filter::filter> no_filters {};
+    std::unique_ptr<logging::logger::logger> const log = std::make_unique<logging::logger::simple_logger>(
+        logging::level::trace,
+        no_filters,
+        std::make_unique<logging::handling::stdout_handler>(
+            logging::level::trace,
+            no_filters,
+            std::make_unique<logging::format::simple_formatter>()
+        )
+    );
 
-    log->trace("Created logger from factory");
+    log->trace("Created logger");
 
     log->debug("This is a debug logger");
 

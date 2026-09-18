@@ -6,15 +6,15 @@
 
 namespace logging::logger {
     class simple_logger final : virtual public logger {
-        level level;
+        level logger_level;
         std::vector<filter::filter> filters;
         std::unique_ptr<handling::handler> handler;
+
     public:
-        //simple_logger();
-        simple_logger(logging::level level, std::vector<filter::filter> filters, std::unique_ptr<handling::handler> handler);
+        simple_logger(level logger_level, std::vector<filter::filter> filters, std::unique_ptr<handling::handler> handler);
         ~simple_logger() override = default;
 
-        void handle_record(const record &record) const override;
+        void handle_record(record const& record) const override;
 
         void trace(std::string_view message) const override;
         void debug(std::string_view message) const override;
