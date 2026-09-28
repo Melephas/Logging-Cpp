@@ -9,9 +9,9 @@
 namespace logging::filter {
     typedef std::function<bool(const record &record)> filter;
 
-    inline filter all = [](const record &_){ return false; };
+    inline filter all = []([[maybe_unused]] const record &_){ return false; };
 
-    inline filter none = [](const record &_){ return true; };
+    inline filter none = []([[maybe_unused]] const record &_){ return true; };
 
     inline filter no_emails = [](const record &record){
         const std::regex email_regex(R"([\w\-\.]+@([\w\-]+\-)+[\w]{2,})");
