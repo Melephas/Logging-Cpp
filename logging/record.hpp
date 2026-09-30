@@ -6,13 +6,13 @@
 
 #include "level.hpp"
 
+#include "time/time.hpp"
+
 
 namespace logging {
     struct record {
-        using time_t = std::chrono::time_point<std::chrono::system_clock>;
-
         std::string message;
-        time_t time;
+        std::unique_ptr<time::time> time;
         level record_level;
 
         // Create a new log record with the date and time set during creation

@@ -38,12 +38,7 @@ std::string logging::format::simple_formatter::format_level(const level &level) 
     return this->level_format_table.at(level);
 }
 
-std::string logging::format::simple_formatter::format_time(const std::chrono::time_point<std::chrono::system_clock> &time) const {
-    auto zt = std::chrono::zoned_time {
-        std::chrono::current_zone(),
-        std::chrono::time_point_cast<std::chrono::seconds>(time)
-    };
-
-    return std::format("{:%FT%T%z}", zt);
+std::string logging::format::simple_formatter::format_time(const std::unique_ptr<time::time>& time) const {
+    return time->format();
 }
 

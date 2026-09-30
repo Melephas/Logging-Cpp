@@ -5,6 +5,8 @@
 
 #include "formatter.hpp"
 
+#include "time/time.hpp"
+
 
 namespace logging::format {
     struct simple_formatter final : virtual formatter {
@@ -19,7 +21,7 @@ namespace logging::format {
         std::string time_format_string;
 
         [[nodiscard]] std::string format_level(const level& level) const;
-        [[nodiscard]] std::string format_time(const std::chrono::time_point<std::chrono::system_clock> &time) const;
+        [[nodiscard]] std::string format_time(const std::unique_ptr<time::time>& time) const;
 
     };
 }
