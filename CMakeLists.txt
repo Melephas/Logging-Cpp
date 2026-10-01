@@ -37,7 +37,12 @@ add_library(Logging
 
 target_include_directories(Logging PUBLIC logging)
 
-option(NO_STD_CHRONO "Use the C time library (for when C++ std::chrono is incomplete)" ON)
+option(NO_STD_CHRONO "Use the C time library (for when C++ std::chrono is incomplete)" OFF)
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    set(NO_STD_CHRONO ON)
+endif ()
+
 if (NO_STD_CHRONO)
     target_compile_definitions(
         Logging PRIVATE
