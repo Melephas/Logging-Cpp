@@ -1,3 +1,5 @@
+#ifndef NO_STD_CHRONO
+
 #include "chrono_time.hpp"
 
 #include <format>
@@ -10,3 +12,5 @@ std::string logging::time::chrono_time::format() const {
 
     return std::format("{:%FT%T%z}", zt);
 }
+
+#endif

@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef NO_STD_CHRONO
+
 #include <chrono>
 #include <string>
 #include "time.hpp"
@@ -12,3 +15,5 @@ namespace logging::time {
         [[nodiscard]] std::string format() const override;
     };
 }
+
+#endif
